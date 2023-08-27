@@ -3,6 +3,8 @@ package com.nttdata.companytrainingmanagement.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "EMPLOYEES")
 @Getter
@@ -21,4 +23,13 @@ public class Employee {
 
     @Column(nullable = false)
     private String lastName;
+
+    @ManyToMany
+    @JoinTable(
+            name = "employee_training",
+            joinColumns = @JoinColumn(name = "employee_id"),
+            inverseJoinColumns = @JoinColumn(name = "training_id")
+    )
+    private List<Training> trainings;
+
 }
