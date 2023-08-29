@@ -100,7 +100,6 @@ public class AuthorServiceTest {
 
     @Test
     public void testDeleteAuthor() {
-        // Arrange
 
         // Act
         authorService.deleteAuthor(1L);

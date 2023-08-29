@@ -1,6 +1,5 @@
 package com.nttdata.companytrainingmanagement.services;
 
-import com.nttdata.companytrainingmanagement.dtos.TrainingDTO;
 import com.nttdata.companytrainingmanagement.entities.Author;
 import com.nttdata.companytrainingmanagement.entities.Platform;
 import com.nttdata.companytrainingmanagement.entities.Training;
@@ -35,24 +34,24 @@ class TrainingServiceTest {
     public void testFindAllTrainings() {
         // Arrange
         List<Training> trainingList = new ArrayList<>();
-        trainingList.add(new Training(1L, "Java Training", Platform.UDEMY, 10, new Author(1L,"Joseph","White")));
-        trainingList.add(new Training(2L, "AWS Fundamentals", Platform.ACLOUDGURU, 71,new Author(2L,"Nick","Connor")));
+        trainingList.add(new Training(1L, "Java Training", Platform.UDEMY, 10.5, new Author(1L,"Joseph","White")));
+        trainingList.add(new Training(2L, "AWS Fundamentals", Platform.ACLOUDGURU, 71.0,new Author(2L,"Nick","Connor")));
 
         when(trainingRepository.findAll()).thenReturn(trainingList);
 
         // Act
-        List<TrainingDTO> trainingDTOs = trainingService.findAllTrainings();
+        List<Training> trainings = trainingService.findAllTrainings();
 
         // Assert
-        assertEquals(2, trainingDTOs.size());
-        assertEquals("Java Training", trainingDTOs.get(0).getTitle());
-        assertEquals("AWS Fundamentals", trainingDTOs.get(1).getTitle());
+        assertEquals(2, trainings.size());
+        assertEquals("Java Training", trainings.get(0).getTitle());
+        assertEquals("AWS Fundamentals", trainings.get(1).getTitle());
     }
 
     @Test
     public void testGetTrainingById() {
         // Arrange
-        Training training = new Training(1L, "Java Training", Platform.UDEMY, 10, new Author(1L,"Joseph","White"));
+        Training training = new Training(1L, "Java Training", Platform.UDEMY, 10.5, new Author(1L,"Joseph","White"));
 
         when(trainingRepository.findById(1L)).thenReturn(Optional.of(training));
         when(trainingRepository.findById(2L)).thenReturn(Optional.empty());
@@ -69,7 +68,7 @@ class TrainingServiceTest {
     @Test
     public void testCreateTraining() {
         // Arrange
-        Training newTraining = new Training(1L, "Java Training", Platform.UDEMY, 10, new Author(1L,"Joseph","White"));
+        Training newTraining = new Training(1L, "Java Training", Platform.UDEMY, 10.5, new Author(1L,"Joseph","White"));
 
         when(trainingRepository.save(newTraining)).thenReturn(newTraining);
 
@@ -83,8 +82,8 @@ class TrainingServiceTest {
     @Test
     public void testUpdateTraining() {
         // Arrange
-        Training existingTraining = new Training(1L, "Java Training", Platform.UDEMY, 10, new Author(1L,"Joseph","White"));
-        Training updatedTraining = new Training(1L, "Java Training", Platform.UDEMY, 12, new Author(1L,"Joseph","White"));
+        Training existingTraining = new Training(1L, "Java Training", Platform.UDEMY, 10.5, new Author(1L,"Joseph","White"));
+        Training updatedTraining = new Training(1L, "Java Training", Platform.UDEMY, 12.5, new Author(1L,"Joseph","White"));
 
         when(trainingRepository.findById(1L)).thenReturn(Optional.of(existingTraining));
         when(trainingRepository.save(existingTraining)).thenReturn(updatedTraining);
@@ -95,7 +94,7 @@ class TrainingServiceTest {
         // Assert
         assertEquals("Java Training", result.getTitle());
         assertEquals(Platform.UDEMY, result.getPlatform());
-        assertEquals(12, result.getHours());
+        assertEquals(12.5, result.getHours());
     }
 
     @Test
