@@ -9,7 +9,5 @@ import java.util.List;
 
 @Repository
 public interface TrainingRepository extends JpaRepository<Training, Long> {
-    List<Training> findByAuthor(Author author);
-
-    Training findByTitle(String title);
+    List<Training> findByAuthorId(Long id);
 }

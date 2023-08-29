@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/authors")
 public class AuthorController {
@@ -44,8 +46,15 @@ public class AuthorController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteAuthor(@PathVariable Long id) {
+    public ResponseEntity<?> deleteAuthor(@PathVariable Long id) {
         authorService.deleteAuthor(id);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/authors-with-trainings")
+    public ResponseEntity<List<Author>> getAuthorsWithTrainings() {
+        List<Author> authors = authorService.getAuthorsWithTrainings();
+        return new ResponseEntity<>(authors, HttpStatus.OK);
+    }
+
 }

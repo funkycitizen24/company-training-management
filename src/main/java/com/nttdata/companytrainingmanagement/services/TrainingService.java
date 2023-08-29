@@ -1,6 +1,6 @@
 package com.nttdata.companytrainingmanagement.services;
 
-import com.nttdata.companytrainingmanagement.dtos.TrainingDTO;
+import com.nttdata.companytrainingmanagement.entities.Author;
 import com.nttdata.companytrainingmanagement.entities.Training;
 import com.nttdata.companytrainingmanagement.repos.TrainingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,18 +19,18 @@ public class TrainingService {
         this.trainingRepository = trainingRepository;
     }
 
-    public List<TrainingDTO> findAllTrainings() {
+    public List<Training> findAllTrainings() {
         List<Training> allTrainings = trainingRepository.findAll();
-        List<TrainingDTO> trainingDTOs = new ArrayList<>();
+        List<Training> trainingDTOs = new ArrayList<>();
 
         for (Training training : allTrainings) {
-            TrainingDTO dto = new TrainingDTO();
-            dto.setId(training.getId());
-            dto.setTitle(training.getTitle());
-            dto.setPlatform(training.getPlatform());
-            dto.setHours(training.getHours());
+            Training newTraining = new Training();
+            newTraining.setId(training.getId());
+            newTraining.setTitle(training.getTitle());
+            newTraining.setPlatform(training.getPlatform());
+            newTraining.setHours(training.getHours());
 
-            trainingDTOs.add(dto);
+            trainingDTOs.add(newTraining);
         }
         return trainingDTOs;
     }
@@ -39,10 +39,9 @@ public class TrainingService {
         return trainingRepository.findById(id).orElse(null);
     }
 
-    public Training findTrainingByTitle(String title){
-        return  trainingRepository.findByTitle(title);
+    public List<Training> getTrainingsForCertainAuthor(Long id){
+        return trainingRepository.findByAuthorId(id);
     }
-
     public Training createTraining(Training training) {
         return trainingRepository.save(training);
     }

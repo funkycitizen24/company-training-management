@@ -24,12 +24,21 @@ public class Employee {
     @Column(nullable = false)
     private String lastName;
 
-    @ManyToMany
-    @JoinTable(
-            name = "employee_training",
-            joinColumns = @JoinColumn(name = "employee_id"),
-            inverseJoinColumns = @JoinColumn(name = "training_id")
-    )
-    private List<Training> trainings;
+    @Column(nullable = false)
+    private String email;
 
+    @Column(nullable = false)
+    private String department;
+
+    @OneToMany(mappedBy = "employee")
+    private List<EmployeeTraining> trainings;
+
+
+    public Employee(Long id, String firstName, String lastName, String email, String department) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.department = department;
+    }
 }
