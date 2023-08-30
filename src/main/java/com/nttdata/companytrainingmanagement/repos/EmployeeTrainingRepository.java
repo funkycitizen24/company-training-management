@@ -5,14 +5,16 @@ import com.nttdata.companytrainingmanagement.entities.EmployeeTraining;
 import com.nttdata.companytrainingmanagement.entities.Training;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface EmployeeTrainingRepository extends JpaRepository<EmployeeTraining, Long> {
 
-    @Query("SELECT et.training FROM EmployeeTraining et WHERE et.employee.id =: employeeId")
+    @Query("SELECT et.training FROM EmployeeTraining et WHERE et.employee.id=:employeeId")
     List<Training> findAllTrainingsByEmployeeId(Long employeeId);
 
-    @Query("SELECT et.training FROM EmployeeTraining et WHERE et.employee.id = :employeeId AND et.training.id =: trainingId")
-    EmployeeTraining findByEmployeeIdAndTrainingId(Long employeeId, Long trainingId);
+    @Query("SELECT et.training FROM EmployeeTraining et WHERE et.employee.id=:employeeId AND et.training.id=:trainingId")
+    EmployeeTraining findByEmployeeIdAndTrainingId( Long employeeId,Long trainingId);
 }

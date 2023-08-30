@@ -26,11 +26,6 @@ public class EmployeeService {
         this.employeeTrainingRepository = employeeTrainingRepository;
     }
 
-    @Autowired
-    public EmployeeService(EmployeeRepository employeeRepository, TrainingRepository trainingRepository) {
-        this.employeeRepository = employeeRepository;
-        this.trainingRepository = trainingRepository;
-    }
 
     public Employee createEmployee(Employee employee) {
         return employeeRepository.save(employee);
