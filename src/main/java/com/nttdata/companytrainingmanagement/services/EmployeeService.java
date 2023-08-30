@@ -1,15 +1,14 @@
 package com.nttdata.companytrainingmanagement.services;
 
 import com.nttdata.companytrainingmanagement.entities.*;
+import com.nttdata.companytrainingmanagement.exceptions.ResourceNotFoundException;
 import com.nttdata.companytrainingmanagement.repos.EmployeeRepository;
 import com.nttdata.companytrainingmanagement.repos.EmployeeTrainingRepository;
 import com.nttdata.companytrainingmanagement.repos.TrainingRepository;
-import org.apache.kafka.common.errors.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class EmployeeService {
@@ -24,12 +23,6 @@ public class EmployeeService {
         this.employeeRepository = employeeRepository;
         this.trainingRepository = trainingRepository;
         this.employeeTrainingRepository = employeeTrainingRepository;
-    }
-
-    @Autowired
-    public EmployeeService(EmployeeRepository employeeRepository, TrainingRepository trainingRepository) {
-        this.employeeRepository = employeeRepository;
-        this.trainingRepository = trainingRepository;
     }
 
     public Employee createEmployee(Employee employee) {
