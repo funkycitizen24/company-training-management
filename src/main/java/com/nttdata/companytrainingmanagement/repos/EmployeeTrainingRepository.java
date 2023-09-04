@@ -1,6 +1,5 @@
 package com.nttdata.companytrainingmanagement.repos;
 
-import com.nttdata.companytrainingmanagement.entities.Employee;
 import com.nttdata.companytrainingmanagement.entities.EmployeeTraining;
 import com.nttdata.companytrainingmanagement.entities.Training;
 import org.springframework.data.jpa.repository.JpaRepository;
